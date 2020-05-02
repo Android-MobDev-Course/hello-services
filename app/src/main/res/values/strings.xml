@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">HelloServices</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="waiting_for_incoming_intents">Waiting for incoming Intents ...</string>
+    <string name="type_intent_service">Type - Job Intent Service</string>
+    <string name="type_bound_service">Type - Bound Service</string>
+    <string name="type_started_service">Type - Started Service</string>
+    <string name="read_status">Read Status</string>
+    <string name="wait_for_requested_data">Wait for requested data ...</string>
+    <string name="schedule_work">Schedule Work</string>
+</resources>
