@@ -9,4 +9,4 @@ The repository contains a list of projects aiming to show simple core Android fu
 # Project Info
 
 * *Slide Deck*: Android Background Services
-* *Project Info*: Project showing how to work with Started, Bound and JobIntentService
+* *Project Info*: Project showing how to work with Started, Bound, JobIntentService and JobService
