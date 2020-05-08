@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
         unRegisterServiceBroadcastReceiver();
+
         stopMyStartedService();
 
         stopMyBoundService();
@@ -159,19 +160,19 @@ public class MainActivity extends AppCompatActivity {
 
             myBoundServiceConnection = new ServiceConnection() {
 
-                @Override
-                public void onServiceConnected(ComponentName className, IBinder service) {
-                    // We've bound to LocalService, cast the IBinder and get LocalService instance
-                    MyBoundService.LocalBinder binder = (MyBoundService.LocalBinder) service;
-                    myBoundService  = binder.getService();
-                }
+            @Override
+            public void onServiceConnected(ComponentName className, IBinder service) {
+                // We've bound to LocalService, cast the IBinder and get LocalService instance
+                MyBoundService.LocalBinder binder = (MyBoundService.LocalBinder) service;
+                myBoundService  = binder.getService();
+            }
 
-                @Override
-                public void onServiceDisconnected(ComponentName arg0) {
-                    myBoundService = null;
-                }
-            };
-        }
+            @Override
+            public void onServiceDisconnected(ComponentName arg0) {
+                myBoundService = null;
+            }
+        };
+    }
 
         //Create the intent and bind to the Service
         Intent intent = new Intent(this, MyBoundService.class);
@@ -234,19 +235,24 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+
             //Intent from MyStartedService
-            if(intent != null && intent.getAction().equals(MyStartedService.NEW_VALUE_INTENT_ACTION)
+            if(intent != null
+                    && intent.getAction() != null
+                    && intent.getAction().equals(MyStartedService.NEW_VALUE_INTENT_ACTION)
                     && intent.getExtras() != null
                     && !intent.getExtras().isEmpty()
                     && intent.getExtras().containsKey(MyStartedService.INTENT_VALUE_EXTRA))
                 updateMyStartedServiceReceivedMessage(intent.getIntExtra(MyStartedService.INTENT_VALUE_EXTRA, 0));
-            if(intent != null && intent.getAction().equals(MyJobIntentService.NEW_VALUE_INTENT_ACTION)
+            else if(intent != null
+                    && intent.getAction() != null
+                    && intent.getAction().equals(MyJobIntentService.NEW_VALUE_INTENT_ACTION)
                     && intent.getExtras() != null
                     && !intent.getExtras().isEmpty()
                     && intent.getExtras().containsKey(MyJobIntentService.INTENT_VALUE_EXTRA))
                 updateMyJobIntentServiceReceivedMessage(intent.getIntExtra(MyJobIntentService.INTENT_VALUE_EXTRA, 0));
             else
-                Log.e(TAG, "Wrong Intent Received !");
+                Log.e(TAG, "Wrong Intent Received ! " + intent.getAction());
         }
     }
 

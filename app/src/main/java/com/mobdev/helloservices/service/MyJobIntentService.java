@@ -51,6 +51,7 @@ public class MyJobIntentService extends JobIntentService {
         Log.d(TAG, "MyJobIntentService ---> onHandleWork()");
 
         try {
+
             Thread.sleep(SLEEP_TIME_MS);
 
             if(intent.getExtras() != null && intent.getExtras().containsKey(RANDOM_LIMIT_EXTRA))
@@ -59,6 +60,7 @@ public class MyJobIntentService extends JobIntentService {
                 currentValue = random.nextInt();
 
             notifyValueUpdate();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
